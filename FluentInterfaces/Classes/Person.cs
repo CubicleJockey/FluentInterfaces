@@ -34,28 +34,30 @@ namespace FluentInterfaces.Classes
 
         public ITrainable Train(string skill)
         {
-            if(_skills.Contains(skill))
+            AddSkill(skill);
+            return this;
+        }
+
+        public ITrainable Train(IEnumerable<string> skills)
+        {
+            foreach(var skill in skills)
             {
-                Console.WriteLine($"Already trained in {skill}.");
-            }
-            else
-            {
-                _skills.Add(skill);
-                TrainingHappened?.Invoke(this, new TrainableEventArgs(skill));
+                AddSkill(skill);
             }
             return this;
         }
 
         public ITrainable Do(string skill)
         {
-            if(!_skills.Contains(skill))
+            PerformSkill(skill);
+            return this;
+        }
+
+        public ITrainable Do(IEnumerable<string> skills)
+        {
+            foreach(var skill in skills)
             {
-                Console.WriteLine($"Does not know {skill}.");
-            }
-            else
-            {
-                Console.WriteLine($"Performed {skill}.");
-                DoSkill?.Invoke(this, new TrainableEventArgs(skill));
+                PerformSkill(skill);
             }
             return this;
         }
@@ -98,5 +100,35 @@ namespace FluentInterfaces.Classes
         public event EventHandler<TrainableEventArgs> DoSkill;
 
         #endregion
+
+        #region Helper Methods
+
+        private void AddSkill(string skill)
+        {
+            if (_skills.Contains(skill))
+            {
+                Console.WriteLine($"Already trained in {skill}.");
+            }
+            else
+            {
+                _skills.Add(skill);
+                TrainingHappened?.Invoke(this, new TrainableEventArgs(skill));
+            }
+        }
+
+        private void PerformSkill(string skill)
+        {
+            if (!_skills.Contains(skill))
+            {
+                Console.WriteLine($"Does not know {skill}.");
+            }
+            else
+            {
+                Console.WriteLine($"Performed {skill}.");
+                DoSkill?.Invoke(this, new TrainableEventArgs(skill));
+            }
+        }
+
+        #endregion Helper Methods
     }
 }
