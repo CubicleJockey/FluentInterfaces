@@ -10,7 +10,7 @@ namespace FluentInterfaces.Classes
     {
         #region Members
 
-        private readonly IList<string> _skills;
+        private readonly IList<string> skills;
 
         #endregion Members
 
@@ -25,7 +25,7 @@ namespace FluentInterfaces.Classes
         public Person(string name)
         {
             Name = name;
-            _skills = new List<string>();
+            skills = new List<string>();
         }
 
         #endregion Constructors
@@ -78,7 +78,7 @@ namespace FluentInterfaces.Classes
         {
             var sb = new StringBuilder();
             sb.AppendLine($"Person {Name} has these skills:");
-            foreach(var skill in _skills)
+            foreach(var skill in skills)
             {
                 sb.AppendLine($"\t*{skill}");
             }
@@ -105,20 +105,20 @@ namespace FluentInterfaces.Classes
 
         private void AddSkill(string skill)
         {
-            if (_skills.Contains(skill))
+            if (skills.Contains(skill))
             {
                 Console.WriteLine($"Already trained in {skill}.");
             }
             else
             {
-                _skills.Add(skill);
+                skills.Add(skill);
                 TrainingHappened?.Invoke(this, new TrainableEventArgs(skill));
             }
         }
 
         private void PerformSkill(string skill)
         {
-            if (!_skills.Contains(skill))
+            if (!skills.Contains(skill))
             {
                 Console.WriteLine($"Does not know {skill}.");
             }

@@ -1,6 +1,6 @@
-﻿using System;
-using FluentInterfaces.Classes;
+﻿using FluentInterfaces.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static System.Console;
 
 namespace FluentInterfaces.Tests
 {
@@ -14,12 +14,12 @@ namespace FluentInterfaces.Tests
             person.TrainingHappened += (sender, args) =>
             {
                 var self = (Person) sender;
-                Console.WriteLine($"{self.Name} trained {args.Skill} on {args.TrainingDate}.");
+                WriteLine($"{self.Name} trained {args.Skill} on {args.TrainingDate}.");
             };
             person.DoSkill += (sender, args) =>
             {
                 var self = (Person) sender;
-                Console.WriteLine($"{self.Name} performed {args.Skill} on {args.TrainingDate}.");
+                WriteLine($"{self.Name} performed {args.Skill} on {args.TrainingDate}.");
             };
             
             person.Train("Nunchucks")
@@ -37,12 +37,12 @@ namespace FluentInterfaces.Tests
             person.TrainingHappened += (sender, args) =>
             {
                 var self = (Person)sender;
-                Console.WriteLine($"{self.Name} trained {args.Skill} on {args.TrainingDate}.");
+                WriteLine($"{self.Name} trained {args.Skill} on {args.TrainingDate}.");
             };
             person.DoSkill += (sender, args) =>
             {
                 var self = (Person)sender;
-                Console.WriteLine($"{self.Name} performed {args.Skill} on {args.TrainingDate}.");
+                WriteLine($"{self.Name} performed {args.Skill} on {args.TrainingDate}.");
             };
 
             var skills = new[] {"Run", "Walk", "Swing", "Fly"};
